@@ -4,16 +4,18 @@ commands:
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
-      when_to_run:
+      workflow_id:
         type: string
-        default: "on_fail"  
+        default: ${CIRCLE_WORKFLOW_ID:0:7} 
     steps:
       - run:
           name: Destroy environments
-          when: << parameters.when_to_run >>
+          when: on_fail
           command: |
-            aws cloudformation delete-stack \
-             --stack-name "Udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" 
+            aws s3 rm s3://udapeople-<<parameters.workflow_id>> --recursive
+            aws cloudformation delete-stack --stack-name "udapeople-backend-<<parameters.workflow_id>>" 
+            aws cloudformation delete-stack --stack-name "udapeople-frontend-<<parameters.workflow_id>>" 
+
 
 
 jobs:
@@ -120,23 +122,23 @@ jobs:
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --tags project=Udapeople \
-              --stack-name "Udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople \
+              --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
           name: Deploy front-end infrastructure
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --tags project=Udapeople \
-              --stack-name "Udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+              --tags project=udapeople \
+              --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             aws ec2 describe-instances \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:project,Values=Udapeople" \
+              --filters "Name=tag:project,Values=udapeople" \
               --output text >> inventory.txt
       - persist_to_workspace:
           root: ~/
