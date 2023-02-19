@@ -30,13 +30,18 @@ commands:
       - run:
           name: Install aws-cli
           command: |
-            sudo apt install software-properties-common
-            sudo add-apt-repository ppa:deadsnakes/ppa
-            sudo apt update
-            sudo apt install python3
-            sudo apt install python3-pip
-            sudo apt-get install -y awscli
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install
 
+  install_nodejs:
+    description: Install Node.js 13
+    steps:
+      - run:
+          name: Install Node.js 13
+          command: |
+            curl -fsSL https://deb.nodesource.com/setup_13x | sudo -E bash - 
+            sudo apt install -y nodejs
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -56,7 +61,6 @@ commands:
               npm install
               npm run migrations:revert
             fi
-
 
 jobs:
   build-frontend:
