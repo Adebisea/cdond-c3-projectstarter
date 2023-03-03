@@ -40,7 +40,9 @@ commands:
       - run:
           name: Install Node.js 13
           command: |
-            curl -fsSL https://deb.nodesource.com/setup_13x | sudo -E bash - 
+            sudo apt-get update
+            sudo apt-get install curl
+            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash - 
             sudo apt install -y nodejs
 
   revert-migrations:
