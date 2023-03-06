@@ -8,7 +8,7 @@
   become: true
   apt:
     name: ["nodejs"]
-    state: latest
+    state: "13.14.0"
     update_cache: yes
 
 - name: "Install PM2 Globally"

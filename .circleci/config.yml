@@ -35,14 +35,14 @@ commands:
             sudo ./aws/install
 
   install_nodejs:
-    description: Install Node.js 16
+    description: Install Node.js 13
     steps:
       - run:
-          name: Install Node.js 16
+          name: Install Node.js 13
           command: |
             sudo apt-get update
             sudo apt-get install curl
-            curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - 
+            curl -fsSL https://deb.nodesource.com/setup_13.x | sudo -E bash - 
             sudo apt install -y nodejs
 
   revert-migrations:
@@ -272,8 +272,8 @@ jobs:
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment
       - revert-migrations      
-          
-                    
+
+
   deploy-backend:
     docker:
       - image: cimg/base:stable
