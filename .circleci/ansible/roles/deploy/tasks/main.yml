@@ -32,7 +32,7 @@
 - name: extract artifact
   become: true
   unarchive:
-    src: /home/circleci/project/backend/artifact.tar.gz
+    src: /home/circleci/project/artifact.tar.gz
     dest: /root
 
 - name: start app
