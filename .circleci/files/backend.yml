@@ -30,7 +30,8 @@ Resources:
       SecurityGroups:
         - Ref: InstanceSecurityGroup
       KeyName: udacityp3
-      ImageId: ami-00eeedc4036573771 
+      ImageId: ami-00eeedc4036573771
+      VpcId: vpc-0b9efb78849c8354b
       Tags:
         - Key: Name
           Value: !Sub backend-${ID}
