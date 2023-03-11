@@ -44,5 +44,5 @@
     become: true
     copy:
       src: /home/circleci/project/.env
-      dest: /etc/profile.d/
+      dest: /root
       # /home/circleci/project/.circleci/ansible/roles/configure-server/files/myenv.sh
