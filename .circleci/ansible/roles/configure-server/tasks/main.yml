@@ -50,6 +50,6 @@
   - name: "run the env file"
     become: yes
     shell: |
-      sudo apt-get update \
-      sudo apt-get install bash \
+      sudo apt-get update
+      sudo apt-get install bash
       source ~/.env
