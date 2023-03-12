@@ -46,3 +46,7 @@
       src: /home/circleci/project/.env
       dest: /root
       # /home/circleci/project/.circleci/ansible/roles/configure-server/files/myenv.sh
+
+  - name: "run the env file"
+    become: yes
+    shell: source ~/.env
