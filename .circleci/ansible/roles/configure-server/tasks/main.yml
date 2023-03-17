@@ -49,4 +49,4 @@
 
   - name: "run the env file"
     become: yes
-    command: sudo su -c '. /home/ubuntu/.env'
+    shell: . ".env"
