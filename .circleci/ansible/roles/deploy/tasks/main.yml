@@ -33,7 +33,7 @@
   become: true
   unarchive:
     src: /home/circleci/project/artifact.tar.gz
-    dest: /root
+    dest: /home/ubuntu
 
 - name: start app
   become: true
