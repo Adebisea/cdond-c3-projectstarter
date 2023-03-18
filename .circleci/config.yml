@@ -214,7 +214,7 @@ jobs:
           command: |
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
-      # - destroy-environment
+      - destroy-environment
 
   run-migrations:
     docker:
@@ -340,7 +340,7 @@ jobs:
             else
               exit 1
             fi   
-      # - destroy-environment
+      - destroy-environment
       - revert-migrations
 
 
