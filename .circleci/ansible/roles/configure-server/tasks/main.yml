@@ -43,10 +43,10 @@
   - name: "move env variables to profile.d"
     become: true
     copy:
-      src: /home/circleci/project/.env
-      dest: /home/ubuntu
+      src: /home/circleci/project/.circleci/ansible/roles/configure-server/files/variables.sh
+      dest: /etc/profile.d/variables.sh
       # /home/circleci/project/.circleci/ansible/roles/configure-server/files/myenv.sh
 
-  - name: "run the env file"
-    become: yes
-    shell: . /home/ubuntu/.env
+  # - name: "run the env file"
+  #   become: yes
+  #   shell: . /home/ubuntu/.env
