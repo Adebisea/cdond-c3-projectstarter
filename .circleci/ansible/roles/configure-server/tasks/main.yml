@@ -47,6 +47,9 @@
       dest: /etc/profile.d/variables.sh
       # /home/circleci/project/.circleci/ansible/roles/configure-server/files/myenv.sh
 
-  # - name: "run the env file"
-  #   become: yes
-  #   shell: . /home/ubuntu/.env
+  - name: "run the env file"
+    become: yes
+    shell: |
+      cd /etc/profile.d
+      chmod +x variables.sh
+      . variables.sh
