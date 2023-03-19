@@ -40,10 +40,14 @@
       production: yes
       state: present
 
-  # - name: "move env variables to profile.d"
-  #   become: true
-  #   copy:
-  #     src: /home/circleci/project/.circleci/ansible/roles/configure-server/files/variables.sh
-  #     dest: /etc/profile.d/variables.sh
-  #     # /home/circleci/project/.circleci/ansible/roles/configure-server/files/myenv.sh
+  - name: "move env variables to profile.d"
+    become: true
+    copy:
+      src: /home/circleci/project/.circleci/ansible/roles/configure-server/files/variables.sh
+      dest: /etc/profile.d/variables.sh
+      mode: a+x
+
+  - name: Execute the file on the remote host
+    command: /etc/profile.d/variables.sh
+ 
 
