@@ -35,6 +35,22 @@
     src: /home/circleci/project/artifact.tar.gz
     dest: /home/ubuntu
 
+- name: echo environment variables
+  become: true
+  shell: |
+
+    echo AWS_DEFAULT_REGION=us-east-2 >> ".env"
+    echo TYPEORM_CONNECTION=postgres >> ".env"
+    echo TYPEORM_MIGRATIONS_DIR=./src/migrations >> ".env"
+    echo TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts >> ".env"
+    echo TYPEORM_MIGRATIONS=./src/migrations/*.ts >> ".env"
+    echo TYPEORM_PORT=5432 >> ".env"
+    echo TYPEORM_USERNAME=postgres >> ".env"
+    echo TYPEORM_PASSWORD=udapeople >> ".env"
+    echo TYPEORM_DATABASE=postgres >> ".env"
+    echo TYPEORM_HOST=database-1.cxbh64iub6rq.us-east-2.rds.amazonaws.com >> ".env"
+    cat .env
+
 - name: start app
   become: true
   shell: |

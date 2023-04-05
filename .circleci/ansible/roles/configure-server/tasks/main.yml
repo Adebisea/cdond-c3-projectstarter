@@ -40,24 +40,24 @@
       production: yes
       state: present
 
-  - name: "move env variables to profile.d"
-    become: true
-    copy:
-      src: /home/circleci/project/.circleci/ansible/roles/configure-server/files/variables.sh
-      dest: /etc/profile.d/variables.sh
-      mode: a+x
+  # - name: "move env variables to profile.d"
+  #   become: true
+  #   copy:
+  #     src: /home/circleci/project/.circleci/ansible/roles/configure-server/files/variables.sh
+  #     dest: /etc/profile.d/variables.sh
+  #     mode: a+x
 
-  # - name: Execute the file on the remote host
-  #   command: /etc/profile.d/variables.sh
+  # # - name: Execute the file on the remote host
+  # #   command: /etc/profile.d/variables.sh
 
-  - name: Execute file and decode output as string
-    vars:
-      file_path: "/etc/profile.d/variables.sh"
-    command: "{{ file_path }}"
-    register: output
-    changed_when: false
+  # - name: Execute file and decode output as string
+  #   vars:
+  #     file_path: "/etc/profile.d/variables.sh"
+  #   command: "{{ file_path }}"
+  #   register: output
+  #   changed_when: false
 
-  - set_fact:
-      decoded_output: "{{ output.stdout | b64decode }}"
+  # - set_fact:
+  #     decoded_output: "{{ output.stdout | b64decode }}"
  
 
